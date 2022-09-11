@@ -5,6 +5,7 @@ https://piqnt.com/planck.js/
 
 let ball, floor, floor2;
 var width, height;
+var ang1, ang2
 
 function setup() {
   width = windowWidth; height = windowHeight;
@@ -13,30 +14,32 @@ function setup() {
 
   ball = new Sprite();
   ball.diameter = 50;
-  ball.x = 0.2*width;
-  ball.y = 0.1*height;
+  ball.x = random(0.5*width);
+  ball.y = 0.25*height;
   
   ball.bounciness = 0.5;
+  ang1 = 10;
+  ang2 = 20;
 
   floor = new Sprite();
   floor.collider = 'static';   //floor.collider = 'none';
-  floor.x = 0.3*height;
-  floor.y = 0.4*height;
-  floor.w = 0.2*width;
+  floor.w = 0.3*width;
   floor.h = 10;
-  floor.rotation = 10;
+  floor.rotation = ang1;
+  floor.x = 0.25*width;
+  floor.y = 0.4*height;
   
   floor2 = new Sprite();
   floor2.collider = 'static';
-  floor2.x = 0.6*height;
-  floor2.y = 0.49*height;
   floor2.w = 0.4*width;
   floor2.h = 10;
-  floor2.rotation = 20;
+  floor2.rotation = ang2;
+  floor2.x = floor.x + 0.5*floor.w*cos(ang1) + 0.5*floor2.w*cos(ang2);
+  floor2.y = floor.y + 0.5*floor.w*sin(ang1) + 0.5*floor2.w*sin(ang2);  
   
   // line and ball
   new Sprite(250, 100, [300, 10, 200, 20], 'static');
-  new Sprite(40, 0, 20); // ball
+  new Sprite(random(100), 0, 20); // ball
 }
 
 function draw() {
